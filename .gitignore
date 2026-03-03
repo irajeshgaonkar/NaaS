@@ -1,0 +1,28 @@
+# dependencies
+**/node_modules/
+
+# build outputs
+**/dist/
+**/build/
+frontend/dist/
+infra/cdk/cdk.out/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env
+.env.*
+!.env.example
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# CDK and aws
+infra/cdk.out/

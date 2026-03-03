@@ -1,0 +1,14 @@
+{
+  "source": "naas.integration-test",
+  "detail-type": "naas.rule.trigger",
+  "detail": {
+    "teamId": "team-platform",
+    "ruleName": "ServiceHealthCritical",
+    "customProperties": {
+      "CustomerName": "Acme",
+      "Region": "US"
+    },
+    "subscriptionList": ["user1@example.com"],
+    "operationId": "op-evt-001"
+  }
+}

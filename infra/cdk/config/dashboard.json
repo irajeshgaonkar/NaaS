@@ -1,0 +1,26 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "properties": {
+        "title": "Triggered/Sent/Failed",
+        "metrics": [
+          ["NaaS/Execution", "NotificationsTriggered"],
+          [".", "NotificationsSent"],
+          [".", "NotificationsFailed"]
+        ],
+        "stat": "Sum",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "title": "Latency p95",
+        "metrics": [["NaaS/Execution", "SendLatencyMs"]],
+        "stat": "p95",
+        "period": 300
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": "2.0",
+  "routeKey": "POST /execute/rules/{ruleName}/trigger",
+  "rawPath": "/execute/rules/ServiceHealthCritical/trigger",
+  "headers": {
+    "authorization": "Bearer manager@naas.dev|NotificationManager|team-platform",
+    "x-team-id": "team-platform",
+    "x-correlation-id": "corr-local-001"
+  },
+  "requestContext": {
+    "requestId": "req-local-001",
+    "http": {
+      "method": "POST",
+      "path": "/execute/rules/ServiceHealthCritical/trigger"
+    }
+  },
+  "body": "{\"subscriptionListType\":\"User\",\"subscriptionListDataSource\":\"JSON\",\"subscriptionList\":[\"user1@x.com\"],\"customProperties\":{\"CustomerName\":\"Acme\",\"Region\":\"US\"},\"operationId\":\"op-local-001\"}"
+}

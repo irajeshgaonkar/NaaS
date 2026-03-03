@@ -1,0 +1,43 @@
+import type { APIGatewayProxyEventV2 } from 'aws-lambda';
+import type { AuthContext, UserRole } from './types.js';
+
+const rolePriority: Record<UserRole, number> = {
+  NotificationUser: 1,
+  NotificationManager: 2,
+  NotificationAdmin: 3,
+};
+
+export const parseAuthContext = (event: APIGatewayProxyEventV2): AuthContext => {
+  const rawHeader = event.headers.authorization ?? event.headers.Authorization;
+  if (!rawHeader) {
+    throw new Error('Missing Authorization header');
+  }
+
+  // Mock JWT parsing for local and API Gateway JWT authorizer pass-through.
+  // Format for local testing: Bearer email|role|teamA,teamB
+  const token = rawHeader.replace('Bearer ', '');
+  const [email, role, teams] = token.split('|');
+  if (!email || !role) {
+    throw new Error('Invalid token format');
+  }
+
+  return {
+    sub: email,
+    email,
+    role: role as UserRole,
+    teamIds: teams ? teams.split(',').filter(Boolean) : [],
+  };
+};
+
+export const assertRole = (ctx: AuthContext, minRole: UserRole): void => {
+  if (rolePriority[ctx.role] < rolePriority[minRole]) {
+    throw new Error('Forbidden');
+  }
+};
+
+export const assertTeamScope = (ctx: AuthContext, teamId: string): void => {
+  if (ctx.role === 'NotificationAdmin') return;
+  if (!ctx.teamIds.includes(teamId)) {
+    throw new Error('Forbidden team scope');
+  }
+};
